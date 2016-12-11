@@ -1,0 +1,31 @@
+{
+  "name": "basic-routing-and-verbs",
+  "version": "0.0.0",
+  "description": "basic-routing-and-verbs",
+  "license": "MIT",
+  "repository": "",
+  "author": "",
+  "keywords": [
+    ""
+  ],
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "lint": "tslint --force --format verbose \"index.ts\"",
+    "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "watch": "npm run build -- --watch"
+  },
+  "dependencies": {
+    "funkster-http": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "6.0.31",
+    "rimraf": "^2.5.4",
+    "ts-node": "^1.2.2",
+    "tslint": "3.15.1",
+    "typescript": "2.1.4"
+  },
+  "engines": {
+    "node": ">=4.6.1"
+  }
+}
