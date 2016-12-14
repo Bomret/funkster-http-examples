@@ -1,17 +1,18 @@
 "use strict";
 
-const choose = require('funkster-core').choose;
-const f = require('funkster-http');
+const { choose } = require('funkster-core');
+const { asRequestListener, GET, POST, ifPath, parsePath, body, Ok } = require('funkster-http');
 const http = require('http');
 
 const api =
   choose([
-    f.GET(choose([
-      f.ifPath("/", () => f.Ok("Hello World!")),
-      f.parsePath("/:name", params => f.Ok("Hello from GET, " + params.name))
+    GET(choose([
+      ifPath("/", () => Ok("Hello World!")),
+      parsePath("/:name", params => Ok("Hello from GET, " + params.name))
     ])),
-    f.POST(f.ifPath("/", () => f.body(name => f.Ok("Hello from POST, " + String(name)))))
+    POST(ifPath("/", () => body(name => Ok("Hello from POST, " + String(name)))))
   ]);
 
-const server = http.createServer(f.asRequestListener(api));
-server.listen(8083, () => `Server started on port ${8083}.`);
+const port = process.env.PORT || 8083;
+const server = http.createServer(asRequestListener(api));
+server.listen(port, () => `Server started on http://localhost:${port}.`);
