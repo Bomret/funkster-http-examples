@@ -15,4 +15,4 @@ const api =
 
 const port = process.env.PORT || 8083;
 const server = http.createServer(asRequestListener(api));
-server.listen(port, () => `Server started on http://localhost:${port}.`);
+server.listen(port, () => `Server started on port ${port}.`);

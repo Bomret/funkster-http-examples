@@ -1,9 +1,10 @@
 "use strict";
 
-const f = require('funkster-http');
+const { asRequestListener, body, Ok, POST } = require('funkster-http');
 const http = require('http');
 
-const api = f.POST(f.body(buffer => f.Ok(String(buffer))));
+const api = POST(body(buffer => Ok(buffer)));
 
-const server = http.createServer(f.asRequestListener(api));
-server.listen(8083, () => `Server started.`);
+const port = process.env.PORT || 8083;
+const server = http.createServer(asRequestListener(api));
+server.listen(port, () => `Server started on port ${port}.`);
